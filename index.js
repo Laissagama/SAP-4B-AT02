@@ -1,5 +1,5 @@
 const express = require('express')
-const app = express()
+const api = express()
 const port = 3000
 var ListaDeAlunos = [
 {
@@ -24,8 +24,17 @@ Matricula: 761,
  }
 
 ]
-app.get('/', (req, res) => {
-  res.send(ListaDeAlunos)
+api.get('/', (req, res) => {
+  res.json(ListaDeAlunos)
 })
 
-app.listen(3000)
+api.post('/', (req, res) => {
+  var ListaDeAlunos = {
+    Nome: req.body.Nome,
+    Matricula: req.body.Matricula
+  }
+  ListaDeAlunos.push(ListaDeAlunos)
+  res.json({ menssagem: "Estudante adicionado"})
+})
+
+api.listen(3000)
